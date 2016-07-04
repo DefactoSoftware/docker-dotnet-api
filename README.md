@@ -1,8 +1,4 @@
-# .NET Core API Concept
+# docker dotnet api
 
-```
-docker create \
-  --name=api \
-  -p=5000:5000 \
-  kuret/api
-```
+* `npm start` to build the api
+* `npm run` to run the api

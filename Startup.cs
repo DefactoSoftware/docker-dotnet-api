@@ -48,6 +48,12 @@ namespace apicore
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
+            // Execute migrations on database
+            using (var context = (ApiContext) app.ApplicationServices.GetService<ApiContext>())
+            {
+                context.Database.Migrate();
+            }
+
             app.UseMvc();
         }
     }

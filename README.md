@@ -1,4 +1,4 @@
 # docker dotnet api
 
-* `npm start` to build the api
-* `npm run` to run the api
+* `npm run build` to build the api
+* `npm start` to run the api

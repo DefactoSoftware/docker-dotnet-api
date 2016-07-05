@@ -1,7 +1,7 @@
 {
   "name": "docker-dotnet-api",
   "scripts": {
-    "start": "dotnet restore && dotnet publish && docker build -t \"api\" .",
-    "run": "docker create --name=dotnet-api -p=5000:5000 api"
+    "build": "dotnet restore && dotnet publish && docker build -t \"api\" .",
+    "start": "docker create --name=dotnet-api -p=5000:5000 api && docker start dotnet-api"
   }
 }

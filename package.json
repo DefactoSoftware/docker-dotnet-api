@@ -2,6 +2,6 @@
   "name": "docker-dotnet-api",
   "scripts": {
     "build": "dotnet restore && dotnet publish && docker build -t \"api\" .",
-    "start": "docker create --name=dotnet-api -p=5000:5000 api && docker start dotnet-api"
+    "start": "docker create --name=dotnet-api -p=5000:5000 --link=dotnet-db:postgres api && docker start dotnet-api"
   }
 }

@@ -20,6 +20,13 @@ namespace apicore
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+
+            if (env.IsDevelopment())
+            {
+                builder.AddUserSecrets();
+            }
+
+
             Configuration = builder.Build();
         }
 
@@ -33,13 +40,14 @@ namespace apicore
             // Add framework services.
             services.AddEntityFramework()
                 .AddEntityFrameworkSqlServer()
-                .AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
+                .AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApiContext>()
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddSwaggerGen();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,6 +63,9 @@ namespace apicore
             }
 
             app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUi();
         }
     }
 }

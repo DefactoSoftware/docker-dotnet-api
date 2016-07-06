@@ -36,10 +36,11 @@ namespace apicore
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
-            
+
             // Add framework services.
             services.AddEntityFramework()
                 .AddEntityFrameworkSqlServer()
+                .AddDbContext<ApiContext>(options => options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
                 .AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()

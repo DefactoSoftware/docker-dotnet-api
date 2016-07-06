@@ -39,9 +39,8 @@ namespace apicore
 
             // Add framework services.
             services.AddEntityFramework()
-                .AddEntityFrameworkSqlServer()
-                .AddDbContext<ApiContext>(options => options.UseNpgsql(Configuration["Data:DefaultConnection:ConnectionString"]));
-                .AddDbContext<ApiContext>(options => options.UseSqlServer(Configuration["ConnectionString"]));
+                .AddEntityFrameworkNpgsql()
+                .AddDbContext<ApiContext>(options => options.UseNpgsql(Configuration["ConnectionString"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApiContext>()
